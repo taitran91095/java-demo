@@ -38,6 +38,11 @@ public class ProjectController {
         return new ResponseEntity<Project>(newProject, HttpStatus.CREATED);
     }
 
+    @GetMapping("model")
+    public ResponseEntity<?> getModel(){
+               return new ResponseEntity<Project>(new Project(), HttpStatus.OK);
+    }
+
     @GetMapping("/{projectId}")
     public ResponseEntity<?> getProjectById(@PathVariable String projectId){
         Project project = projectService.findProjectByIdentifier(projectId);
