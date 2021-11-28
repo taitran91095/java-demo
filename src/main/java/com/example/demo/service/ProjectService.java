@@ -5,6 +5,7 @@ import com.example.demo.exceptions.ProjectIdException;
 import com.example.demo.exceptions.ProjectNotFoundException;
 import com.example.demo.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,8 +20,7 @@ public class ProjectService {
             project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
             return projectRepository.save(project);
 
-        }catch (Exception e){
-
+        }catch (DataIntegrityViolationException e){
             throw new ProjectIdException("Project ID '"+project.getProjectIdentifier().toUpperCase()+"' already exists");
 
         }
